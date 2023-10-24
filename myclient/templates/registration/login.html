@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="container1">
+        <div class="login-form">
+            <div class="user-name">
+                {% if user.is_authenticated %}
+                <p>Vítejte, {{ user.username }}!</p>
+                <a href="{% url 'logout' %}" class="button1">Odhlásit se</a>
+                {% else %}
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                    <button type="submit" class="button1">Přihlásit se</button>
+                </form>
+                <p>Nejste přihlášen/a.</p>
+                <a href="{% url 'registrace_uzivatele' %}">Registrovat se</a>
+                {% endif %}
+            </div>
+        </div> 
+    </div>
+{% endblock %}

@@ -1,0 +1,145 @@
+/* Globální styly */
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #99d0f0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 40px;
+    color: #fff;
+    float: left;
+    margin-left: 30px;
+}
+
+/* Navigační menu */
+.navbar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline;
+    margin-right: 25px;
+}
+.navbar {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+   
+}
+.login-form {
+
+    
+    background-color: #ff660c; 
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: auto;
+    text-align: right
+     
+    
+}
+.user-name {
+    
+display:inline-block ;
+margin-left: 50px;
+
+}
+
+/* Logo v pravém horním rohu */
+.logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* Obsah stránky */
+.content {
+    padding-right:  20px;
+    color: #007bff;
+}
+
+/* Tlačítka */
+.button {
+    background-color: #ff660c;
+    color: #fff;
+    border: none;
+    border-radius: 30px; 
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.button1 {
+    background-color: #99d0f0;
+    color: #fff;
+    border: none;
+    border-radius: 30px; 
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.button:hover {
+    background-color: #8489c2; /* Nová barva při hoveru */
+}
+
+.button1:hover {
+    background-color: #8489c2; /* Nová barva při hoveru */
+}
+
+.confirm-checkbox {
+    margin-right: 5px;
+}
+
+.delete-button {
+    background-color: #ff660c;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #8489c2;
+}
+
+
+footer {
+    box-sizing: border-box;
+    text-align:center;
+    height: 80px;
+    color: white;
+    background:#99d0f0;
+    padding: 50px 0 0 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+}
+
+.error {
+    color: red !important;
+    font-size: 12px;
+    margin-top: 2px;
+}

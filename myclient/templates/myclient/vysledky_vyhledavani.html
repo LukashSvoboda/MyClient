@@ -1,0 +1,92 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Výsledky vyhledávání</title>
+    <link rel="stylesheet" href="{% static 'myclient/vyhledavani.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        {% if vysledky.count == 0 %}
+            <h2>Nic nenalezeno</h2>
+        {% else %}
+            <h1>Výsledky vyhledávání</h1>
+            
+            {% for vysledek in vysledky %}
+                <h2>Pojištěnec</h2>
+                <table class="results-table">
+                    <tr>
+                        <td>
+                            <div class="info1">
+                                <strong>Jméno:</strong><br>
+                                <strong>Číslo pojištěnce:</strong><br>
+                                <strong>Datum narození:</strong><br>
+                                <strong>Telefon:</strong><br>
+                                <strong>Email:</strong><br>
+                                <strong>Adresa:</strong><br>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="info1">
+                                {{ vysledek.jmeno }} {{ vysledek.prijmeni }}<br>
+                                {{ vysledek.cislo_pojistence }}<br>
+                                {{ vysledek.datum_narozeni }}<br>
+                                {{ vysledek.telefon }}<br>
+                                {{ vysledek.email }}<br>
+                                {{ vysledek.bydliste.ulice }} {{ vysledek.bydliste.cislo_popisne }}, {{ vysledek.bydliste.mesto }} {{ vysledek.bydliste.psc }}<br>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                            <div class="info">
+                                <h2>Smlouvy</h2>
+                            </div>
+                            <table class="smlouvy">
+                                <tr>
+                                    <th>Číslo smlouvy</th>
+                                    <th>Datum počátku</th>
+                                    <th>Datum výročí</th>
+                                    <th>Typ smlouvy</th>
+                                </tr>
+                                {% for smlouva in vysledek.smlouva_set.all %}
+                                    <tr>
+                                        <td>{{ smlouva.cislo_smlouvy }}</td>
+                                        <td>{{ smlouva.datum_pocatek }}</td>
+                                        <td>{{ smlouva.datum_vyroci }}</td>
+                                        <td>{{ smlouva.get_typ_smlouvy_display }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <form method="post" action="{% url 'editovat_pojistence' vysledek.cislo_pojistence %}">
+                            {% csrf_token %}
+                            <td><button type="submit">Editovat pojištěnce</button></td>
+                        </form>
+                        <form method="post" action="{% url 'smazat_pojistence' vysledek.cislo_pojistence %}">
+                            {% csrf_token %}
+                            <td><button type="submit">Smazat pojištěnce</button></td>
+                        </form>
+                    </tr>
+                </table>
+                
+                {% if not forloop.last %}
+                    <hr class="vysledek-separator">
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        
+        <a href="{% url 'index' %}">Zpět na úvodní stránku</a>
+    </div>
+
+    <img src="/static/myclient/images/logo_aplikace.png" alt="Logo" class="logo-img">
+</body>
+</html>

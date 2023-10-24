@@ -1,0 +1,43 @@
+<!-- Tento kód je jednoduchý HTML dokument, který zobrazuje seznam pojištěnců, kteří mají dnes narozeniny. 
+    Pokud žádný pojištěnec narozeniny nemá, zobrazí se výpis, že žádní pojištěnci dnes narozeniny nemají. -->
+
+
+{% load static %} <!-- Načítání statických souborů pro Django -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pojištěnci s narozeninami dnes</title>
+    
+    <!-- Připojení externího CSS souboru -->
+    <link rel="stylesheet" href="{% static 'myclient/narozeniny.css' %}">
+</head>
+
+<body>
+
+    <!-- Nadpis sekce -->
+    <h2>Dnes má narozeniny</h2>
+    
+    <!-- Seznam pojištěnců s narozeninami dnes -->
+    <ul>
+        <!-- Iterace přes seznam pojištěnců a jejich věk -->
+        {% for pojistenec, vek in pojistenci_a_vek %}
+            <li>
+                <!-- Zobrazí jméno a příjmení pojištěnce -->
+                <span class="name">{{ pojistenec.jmeno }} {{ pojistenec.prijmeni }}</span>
+                
+                <!-- Zobrazí aktuální věk pojištěnce -->
+                {{ vek }} let
+                
+                <!-- Zobrazí telefonní číslo pojištěnce -->
+                <span class="telefon">telefon: {{ pojistenec.telefon }}</span>
+            </li>
+            
+        {% empty %} <!-- Podmínka, pokud nejsou žádní pojištěnci s narozeninami dnes -->
+            <li>Žádní pojištěnci dnes narozeniny nemají.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

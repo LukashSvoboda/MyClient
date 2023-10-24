@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vyhledat pojištěnce</title>
+    <link rel="stylesheet" href="{% static 'myclient/formulare.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Vyhledat pojištěnce</h1>
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Číslo pojištěnce - nyní bez "required" atributu -->
+            <label for="cislo_pojistence">Číslo pojištěnce:</label>
+            <input type="text" id="cislo_pojistence" name="cislo_pojistence" value="{{ form.cislo_pojistence.value }}">
+
+            <!-- Jméno -->
+            <label for="jmeno">Jméno:</label>
+            <input type="text" id="jmeno" name="jmeno" value="{{ form.jmeno.value }}">
+
+            <!-- Příjmení -->
+            <label for="prijmeni">Příjmení:</label>
+            <input type="text" id="prijmeni" name="prijmeni" value="{{ form.prijmeni.value }}">
+            
+            <!-- Tlačítko pro odeslání formuláře -->
+            <button type="submit">Vyhledat</button>
+        </form>
+
+        <!-- Chybové hlášky z formuláře -->
+        {% if form.errors %}
+            <ul class="form-errors">
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <a href="{% url 'index' %}">Zpět na úvodní stránku</a>
+    </div>
+    
+    <img src="/static/myclient/images/logo_aplikace.png" alt="Logo" class="logo-img">    
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="container1">
+        <div class="login-form">
+            <div class="user-name">
+                <p>Byli jste úspěšně odhlášeni.</p>
+                <a href="{% url 'login' %}" class="button1">Přihlásit se znovu</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

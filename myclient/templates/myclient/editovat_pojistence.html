@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editovat pojištěnce</title>
+    <link rel="stylesheet" href="{% static 'myclient/formulare.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Editovat pojištěnce</h1>
+
+            <form method="post">
+            {% csrf_token %}
+            
+            <!-- Sekce pro vložení jména -->
+            <label for="jmeno">Jméno:</label>
+            <input type="text" id="jmeno" name="jmeno" value="{{ pojistenec.jmeno }}" required class="{{ form.jmeno.field.widget.attrs.class }}">
+            {% if form.jmeno.errors %}
+                <span class="error">{{ form.jmeno.errors.0 }}</span>
+            {% endif %}
+
+            <!-- Sekce pro vložení příjmení -->
+            <label for="prijmeni">Příjmení:</label>
+            <input type="text" id="prijmeni" name="prijmeni" value="{{ pojistenec.prijmeni }}" required class="{{ form.prijmeni.field.widget.attrs.class }}">
+            {% if form.prijmeni.errors %}
+                <span class="error">{{ form.prijmeni.errors.0 }}</span>
+            {% endif %}
+
+            <!-- Sekce pro vložení čísla pojištěnce (bez editace) -->
+            <label for="cislo_pojistence">Číslo pojištěnce - neměnný údaj!:</label>
+            <input type="text" id="cislo_pojistence" name="cislo_pojistence" value="{{ pojistenec.cislo_pojistence }}" readonly class="{{ form.cislo_pojistence.field.widget.attrs.class }}">
+
+            <!-- Sekce pro vložení data narození -->
+            <label for="datum_narozeni">Datum narození:</label>
+            <input type="date" id="datum_narozeni" name="datum_narozeni" value="{{ pojistenec.datum_narozeni|date:'Y-m-d' }}" required class="{{ form.datum_narozeni.field.widget.attrs.class }}">
+            {% if form.datum_narozeni.errors %}
+                <span class="error">{{ form.datum_narozeni.errors.0 }}</span>
+            {% endif %}
+
+            <!-- Sekce pro vložení telefonního čísla -->
+            <label for="telefon">Telefon:</label>
+            <input type="text" id="telefon" name="telefon" value="{{ pojistenec.telefon }}" required class="{{ form.telefon.field.widget.attrs.class }}">
+            {% if form.telefon.errors %}
+                <span class="error">{{ form.telefon.errors.0 }}</span>
+            {% endif %}
+
+            <!-- Sekce pro vložení emailové adresy -->
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" value="{{ pojistenec.email }}" required class="{{ form.email.field.widget.attrs.class }}">
+            {% if form.email.errors %}
+                <span class="error">{{ form.email.errors.0 }}</span>
+            {% endif %}
+
+            
+
+            <!-- Tlačítko pro odeslání formuláře -->
+            <button type="submit">Uložit změny</button>
+        </form>
+        
+        <a href="{% url 'index' %}">Zpět na úvodní stránku</a>
+    </div>
+
+    <!-- Logo aplikace -->
+    <img src="{% static 'myclient/images/logo_aplikace.png' %}" alt="Logo" class="logo-img">
+</body>
+
+</html>

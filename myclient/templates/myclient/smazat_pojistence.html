@@ -1,0 +1,55 @@
+<!-- Tento kód je v podstatě stránka pro potvrzení smazání pojištěnce. Uživatel je dotázán, zda si je skutečně jistý smazáním konkrétního pojištěnce. 
+    Pokud uživatel potvrdí, formulář je odeslán a pojištěnec je smazán z databáze. 
+    Pokud si uživatel rozmyslí, může se vrátit zpět na výsledky vyhledávání. -->
+
+
+
+{% load static %} <!-- Načítání statických souborů pro Django -->
+
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8"> <!-- Specifikace kódování dokumentu -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responzivní nastavení pro mobilní zařízení -->
+    <title>Potvrzení smazání</title>
+    <link rel="stylesheet" href="{% static 'myclient/delete.css' %}"> <!-- Připojení externího CSS souboru -->
+</head>
+
+<body>
+    <div class="container"> <!-- Hlavní kontejner pro obsah stránky -->
+        
+            <h1>Potvrzení smazání</h1>
+            
+            <!-- Výzva k potvrzení smazání s informacemi o pojištěnci -->
+            <p>Jste si jisti, že chcete smazat pojištěnce<br>
+                <br> 
+                <strong>{{ pojistenec.jmeno }} {{ pojistenec.prijmeni }}</strong><br>
+                <br>
+                <br>
+                číslo pojištěnce:<br>
+                <br>
+                <strong>{{ pojistenec.cislo_pojistence }}</strong></p>
+            
+            <form method="post"> <!-- Formulář pro potvrzení smazání -->
+                {% csrf_token %} <!-- Token pro ochranu proti CSRF útokům -->
+                
+                <!-- Checkbox pro potvrzení smazání -->
+                {{ confirm_form.confirm_delete }}
+                <label for="{{ confirm_form.confirm_delete.id_for_label }}">
+                    Potvrzuji smazání
+                </label>
+                
+                <!-- Tlačítko pro odeslání formuláře a provedení smazání -->
+                <button type="submit">Smazat</button>
+            </form>
+            
+            <!-- Odkaz zpět na výsledky vyhledávání -->
+            <a href="{% url 'vyhledat_pojistence' %}">Zpět na výsledky vyhledávání</a>
+        
+    </div>
+
+    <!-- Logo aplikace -->
+    <img src="/static/myclient/images/logo_aplikace.png" alt="Logo" class="logo-img">
+</body>
+</html>

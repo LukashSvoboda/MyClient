@@ -1,0 +1,86 @@
+{% load static %}
+{% load i18n %}
+
+<!-- Základní HTML struktura -->
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <!-- Metadata o stránce -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Správa pojištěnců</title>
+    <!-- Odkaz na CSS styly pro tuto stránku -->
+    <link rel="stylesheet" href="{% static 'myclient/style.css' %}">
+</head>
+<body>
+    <!-- Hlavní obsah stránky -->
+    <div class="main-content">
+        <!-- Sekce s názvem aplikace -->
+        <div class="content">
+            <h1>MyClient</h1>
+        </div>
+    
+        <!-- Sekce s navigačním panelem -->
+        <div class="container">
+            <div class="navbar">
+                <ul>
+                    <!-- Navigační odkazy -->
+                    <li><a href="{% url 'vyhledat_pojistence' %}" class="button">Vyhledej pojištěnce</a></li>
+                    <li><a href="{% url 'vytvor_pojistence' %}" class="button">Přidej pojištěnce</a></li>
+                    <li><a href="{% url 'vypsat_vse' %}" class="button">Všichni pojištěnci</a></li>
+                    <li><a href="outlookcal://" class="button">Kalendář</a></li>
+                    <!-- Podmínka pro zobrazení administračního odkazu -->
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'admin:index' %}" class="button">Admin</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+            
+        <!-- Sekce s přihlašováním -->
+        <div class="container1">
+            <div class="login-form">
+                <!-- Zobrazuje aktuální datum -->
+                <p style="float: left; margin-top: 20px; margin-left: 20px; color: white; font-size: 1.2em;">Dnešní datum: {% now "d. m. Y" %}</p>
+                <!-- Podmínka pro kontrolu, zda je uživatel přihlášen -->
+                {% if user.is_authenticated %}
+                    <div class="user-name">
+                        <!-- Zobrazuje jméno přihlášeného uživatele -->
+                        <p style="margin-right: 15px; color: white; font-size: 1.2em;float: left">
+                            Vítejte, {{ user.first_name }}!</p>
+                        <a href="{% url 'logout' %}" class="button1">Odhlásit se</a>
+                    </div>
+                {% else %}
+                    <!-- Formulář pro přihlášení -->
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                        
+                        <button type="submit" class="button1">Přihlásit se</button>
+                        <p>Nejste přihlášen/a.</p>
+                    </form><br>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Sekce s odkazem na narozeniny -->
+        <div class="container-narozeniny">
+            <a href="{% url 'narozeniny_dnes' %}" class="button">Narozeniny dnes</a>
+            {% include 'narozeniny_dnes.html' %}
+        </div>
+    
+        <!-- Logo aplikace -->
+        <div class="logo">
+            <img src="{% static 'myclient/images/logo_aplikace.png' %}" alt="Logo" width="100" height="100">
+        </div>
+    </div>
+
+    <!-- Patička stránky -->
+    <footer>
+        Vytvořil &copy; Lukáš Svoboda 2023
+    </footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!-- V tomto HTML kódu je vytvořen jednoduchý přehled všech pojištěnců s odkazy na detailní zobrazení jednotlivých pojištěnců. -->
+
+{% load static %} <!-- Načítání statických souborů pro Django -->
+
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8"> <!-- Specifikace kódování dokumentu -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responzivní nastavení pro mobilní zařízení -->
+    <title>Vypsat všechny pojištěnce</title>
+    <link rel="stylesheet" href="{% static 'myclient/vyhledavani.css' %}"> <!-- Připojení externího CSS souboru -->
+</head>
+
+<body>
+    <div class="container"> <!-- Hlavní kontejner pro obsah stránky -->
+        <h1>Celkový výpis pojištěnců</h1>
+        
+        <table class="smlouvy"> <!-- Tabulka pro zobrazení pojištěnců; třída "smlouvy" byla použita pro stylizaci -->
+            <thead>
+                <!-- Hlavička tabulky -->
+                <tr>
+                    <th>Jméno</th>
+                    <th>Příjmení</th>
+                    <th>Číslo pojištěnce</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <!-- Výpis všech pojištěnců z databáze -->
+                {% for pojistenec in pojistenci %}
+                <tr>
+                    <td>{{ pojistenec.jmeno }}</td>
+                    <td>{{ pojistenec.prijmeni }}</td>
+                    <!-- Odkaz na detailní zobrazení pojištěnce -->
+                    <td><a href="{% url 'detail_pojistence' pojistenec.cislo_pojistence %}">{{ pojistenec.cislo_pojistence }}</a></td>
+                </tr>    
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Odkaz na úvodní stránku -->
+        <a href="{% url 'index' %}">Zpět na úvodní stránku</a>
+    </div>
+
+    <!-- Logo aplikace -->
+    <img src="/static/myclient/images/logo_aplikace.png" alt="Logo" class="logo-img">
+</body>
+</html>

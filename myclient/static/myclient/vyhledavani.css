@@ -1,0 +1,134 @@
+/* Globální styly */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #99D0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 25px;
+    color: #ff660c;
+    margin-bottom: 20px;
+}
+
+
+h2 {
+    font-size: px;
+    color: #080808;
+    margin-bottom: 10px;
+}
+
+/* Tabulka výsledků */
+.results-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styly pro oddíl informací o pojištěnci */
+.info {
+    background-color: #fff;
+    padding: 10px;
+    width: auto;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.info1 {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ff660c;
+    border-radius: 5px;
+    flex: 1;
+    text-align: left;
+}
+
+.smlouvy {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.smlouvy th, .smlouvy td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.smlouvy th {
+    background-color: #f2f2f2;
+}
+
+/* Styly pro tlačítka */
+button {
+    background-color: #ff660c;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background-color: #8489c2;
+}
+
+/* Styly pro checkbox */
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+a {
+    color: #99D0f0;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.logo-img {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 100px;
+}
+
+.vysledek-separator {
+    margin: 20px 0;
+    width: 90%;
+    border: 0;
+    border-radius: 3px;
+    display: block;
+    height: 10px;
+    background-color: #808080; /* šedá barva */
+}
+
+.error {
+    color: red !important;
+    font-size: 12px;
+    
+}

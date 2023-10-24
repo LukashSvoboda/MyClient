@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vytvořit smlouvu</title>
+    <link rel="stylesheet" href="{% static 'myclient/formulare.css' %}">
+    <style>
+        .error {
+            color: red;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Vytvořit smlouvu</h1>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <ul{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</ul>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="cislo_smlouvy">Číslo smlouvy:</label>
+            <input type="text" id="cislo_smlouvy" name="cislo_smlouvy" value="{{ smlouva_form.cislo_smlouvy.value|default:'' }}" required>
+            {% if smlouva_form.cislo_smlouvy.errors %}
+                <span class="error">{{ smlouva_form.cislo_smlouvy.errors.0 }}</span>
+            {% endif %}
+
+            <label for="datum_pocatek">Datum počátku:</label>
+            <input type="date" id="datum_pocatek" name="datum_pocatek" value="{{ form.datum_pocatek.value|default:'' }}" required>
+            {% if form.datum_pocatek.errors %}
+                <span class="error">{{ form.datum_pocatek.errors.0 }}</span>
+            {% endif %}
+
+            <label for="datum_vyroci">Datum výročí:</label>
+            <input type="date" id="datum_vyroci" name="datum_vyroci" value="{{ form.datum_vyroci.value|default:'' }}" required>
+            {% if form.datum_vyroci.errors %}
+                <span class="error">{{ form.datum_vyroci.errors.0 }}</span>
+            {% endif %}
+
+            <label for="typ_smlouvy">Typ smlouvy:</label>
+            <select id="typ_smlouvy" name="typ_smlouvy" required>
+                <option value="majetek">Majetek</option>
+                <option value="auto">Auto</option>
+                <option value="zivot">Život</option>
+                <option value="investice">Investice</option>
+                <option value="mojefirma">Moje Firma</option>
+                <option value="podnikatele">Podnikatelé</option>
+                <option value="prumysl">Průmysl</option>
+                <option value="drony">Drony</option>
+                <option value="flotila">Flotila</option>
+            </select>
+            {% if form.typ_smlouvy.errors %}
+                <span class="error">{{ form.typ_smlouvy.errors.0 }}</span>
+            {% endif %}
+
+            <button type="submit" name="action" value="opakovat">Uložit a přidat další smlouvu</button>
+            <button type="submit" name="action" value="ulozit">Uložit a odejít na hlavní stránku</button>
+        </form>
+
+        <a href="{% url 'index' %}">Zpět na úvodní stránku</a>
+
+    </div>
+
+    <img src="/static/myclient/images/logo_aplikace.png" alt="Logo" class="logo-img">
+
+</body>
+</html>

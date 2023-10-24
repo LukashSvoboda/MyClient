@@ -1,0 +1,41 @@
+.container-narozeniny {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, sans-serif;
+    max-width: 600px;
+    margin: 50px auto;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left: 2px; /* Přidáno pro vzdálenost od levého okraje */
+    margin-bottom: 20px;
+    max-height: 300px; /* Nastavte maximální výšku podle vašich potřeb. */
+    overflow-y: auto;  /* Přidá vertikální scrollbar, pokud je obsah delší než maximální výška. */
+}
+
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.name {
+    width: 120px; /* Upravte šířku podle potřeby */
+}
+
+.telefon {
+    margin-left: 20px; /* Prostor mezi jménem a telefonem */
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}

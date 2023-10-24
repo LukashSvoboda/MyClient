@@ -1,0 +1,77 @@
+<!-- V tomto HTML kódu je vytvořen formulář pro vytvoření pojištěnců a uložení do databáze s ošetřením
+    špatného zadání do polí formuláře. -->
+
+{% load static %} <!-- Načtení statických souborů pro Django -->
+
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8"> <!-- Specifikace kódování dokumentu -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responzivní nastavení pro mobilní zařízení -->
+    <title>Přidat pojištěnce</title>
+    <link rel="stylesheet" href="{% static 'myclient/formulare.css' %}"> <!-- Připojení externího CSS souboru -->
+</head>
+
+<body>
+    <div class="container"> <!-- Hlavní kontejner pro obsah stránky -->
+
+        <h1>Přidat pojištěnce</h1> <!-- Nadpis stránky -->
+
+        <form method="post"> <!-- Začátek formuláře s metodou POST -->
+            {% csrf_token %} <!-- Token pro ochranu před CSRF útoky -->
+
+            <!-- Sekce pro vložení jména -->
+            <label for="jmeno">Jméno:</label>
+            <input type="text" id="jmeno" name="jmeno" value="{{ form.jmeno.value|default:'' }}" required>
+            {% if form.jmeno.errors %}
+                <span class="error">{{ form.jmeno.errors.0 }}</span>
+            {% endif %}
+
+            <!-- Sekce pro vložení příjmení -->
+            <label for="prijmeni">Příjmení:</label>
+            <input type="text" id="prijmeni" name="prijmeni" value="{{ form.prijmeni.value|default:'' }}" required>
+            {% if form.prijmeni.errors %}
+                <span class="error">{{ form.prijmeni.errors.0 }}</span>
+            {% endif %}
+
+            <!-- Sekce pro vložení čísla pojištěnce -->
+            <label for="cislo_pojistence">Číslo pojištěnce:</label>
+            <input type="text" id="cislo_pojistence" name="cislo_pojistence" value="{{ form.cislo_pojistence.value|default:'' }}" required>
+            {% if form.cislo_pojistence.errors %}
+                <span class="error">{{ form.cislo_pojistence.errors.0 }}</span>
+            {% endif %}
+
+            <!-- Sekce pro vložení data narození -->
+            <label for="datum_narozeni">Datum narození:</label>
+            <input type="date" id="datum_narozeni" name="datum_narozeni" value="{{ form.datum_narozeni.value|default:'' }}" required><!-- ponechá vyplněné pole při chybě -->
+            {% if form.datum_narozeni.errors %}
+                <span class="error">{{ form.datum_narozeni.errors.0 }}</span>
+            {% endif %}
+
+            <!-- Sekce pro vložení telefonního čísla -->
+            <label for="telefon">Telefon:</label>
+            <input type="text" id="telefon" name="telefon" value="{{ form.telefon.value|default:'' }}" required><!-- ponechá vyplněné pole při chybě -->
+            {% if form.telefon.errors %}
+                <span class="error">{{ form.telefon.errors.0 }}</span>
+            {% endif %}
+
+            <!-- Sekce pro vložení emailové adresy -->
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" value="{{ form.email.value|default:'' }}" required><!-- ponechá vyplněné pole při chybě -->
+            {% if form.email.errors %}
+                <span class="error">{{ form.email.errors.0 }}</span>
+            {% endif %}
+
+            <!-- Tlačítko pro odeslání formuláře -->
+            <button type="submit">Uložit</button>
+        </form>
+        
+        <a href="{% url 'index' %}">Zpět na úvodní stránku</a> <!-- Odkaz na úvodní stránku -->
+
+    </div> <!-- Konec hlavního kontejneru -->
+
+    <!-- Logo aplikace -->
+    <img src="/static/myclient/images/logo_aplikace.png" alt="Logo" class="logo-img">    
+</body>
+</html>
